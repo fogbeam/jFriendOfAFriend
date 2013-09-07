@@ -77,6 +77,12 @@ public class JenaFoafModel implements FoafModel
 	private void populatePersonProperties( FoafPerson person, Resource jenaPerson )
 	{
 		
+		String name = person.getName();
+		if( null != name )
+		{
+			jenaPerson.addProperty( FOAF.name, name );
+		}
+		
 		String aimchatid = person.getAimChatID();
 		if( null != aimchatid )
 		{

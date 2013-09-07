@@ -26,6 +26,10 @@ package org.fogbeam.foaf.api;
 
 public interface FoafAgent
 {
+	
+	public String getName();
+	public void setName( String name );
+	
 	public String getMbox();
 	public void setMbox( String mbox );
 	

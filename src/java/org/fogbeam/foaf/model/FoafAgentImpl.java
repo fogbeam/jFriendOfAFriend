@@ -7,6 +7,7 @@ import org.fogbeam.foaf.api.FoafAgent;
 
 public class FoafAgentImpl implements FoafAgent
 {
+	private String name;
 	private String aimChatID;
 	private String birthday;
 	private String gender;
@@ -21,6 +22,17 @@ public class FoafAgentImpl implements FoafAgent
 	private String tipjar;
 	private String yahooChatID;
 
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public void setName( String name )
+	{
+		this.name = name;
+	}
+	
 	public String getAimChatID()
 	{
 		return( this.aimChatID );

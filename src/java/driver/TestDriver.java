@@ -13,7 +13,7 @@ public class TestDriver
 		FoafModel model = FoafModelFactory.createModel( "JENA_25" );
 
 		FoafPerson person = model.newPerson();
-
+		person.setName( "John DOE");
 		person.setAimChatID( "flibble" );
 		person.setFirstName( "John" );
 		person.setFamily_name( "DOE" );
@@ -21,6 +21,7 @@ public class TestDriver
 		model.addPerson( person );
 
 		FoafPerson person2 = model.newPerson();
+		person2.setName( "Jane Doe" );
 		person2.setAimChatID(  "foobar"  );
 		person2.setFirstName( "Jane" );
 		person2.setFamily_name( "Doe" );
