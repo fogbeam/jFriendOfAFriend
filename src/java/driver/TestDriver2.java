@@ -3,10 +3,11 @@ package driver;
 import java.io.FileOutputStream;
 
 import org.fogbeam.foaf.api.FoafModel;
+import org.fogbeam.foaf.api.FoafOnlineAccount;
 import org.fogbeam.foaf.api.FoafPerson;
 import org.fogbeam.foaf.factory.FoafModelFactory;
 
-public class TestDriver
+public class TestDriver2
 {
 	public static void main( String[] args ) throws Exception
 	{
@@ -18,17 +19,19 @@ public class TestDriver
 		person.setFirstName( "John" );
 		person.setFamily_name( "DOE" );
 		person.setGender( "male" );
+		
+		FoafOnlineAccount account1 = model.newOnlineAccount();
+		account1.setAccountName( "John Doe / Quoddy" );
+		account1.setAccountServiceHomepage( "http://localhost:8080/quoddy" );
+		account1.setIdentifier(  "AB153GSA772929DQUOP" );
+		account1.setType( "Quoddy" );
+		
+		person.addAccount( account1 );
+		
 		model.addPerson( person );
-
-		FoafPerson person2 = model.newPerson();
-		person2.setName( "Jane Doe" );
-		person2.setAimChatID(  "foobar"  );
-		person2.setFirstName( "Jane" );
-		person2.setFamily_name( "Doe" );
-		person2.setGender( "female" );
-		model.addPerson( person2 );
-
-		FileOutputStream fos = new FileOutputStream( "foo.rdf" );
+		
+		
+		FileOutputStream fos = new FileOutputStream( "quoddy_users.rdf" );
 
 		// System.out.println( model.toString() );
 

@@ -1,5 +1,7 @@
 package org.fogbeam.foaf.api;
 
+import java.util.List;
+
 /**
  * 
  * 	Class: foaf:Person
@@ -48,24 +50,34 @@ public interface FoafPerson extends FoafAgent
 	public String getSchoolHomepage();
 	public void setSchoolHomepage( String schoolHomepage );
 	
-	public String getKnows();
-	public void setKnows( String knows );
+	public List<FoafPerson> getKnows();
+	public void setKnows( final List<FoafPerson> knows );
+	public void addKnows( final FoafPerson knows );
 	
-	public String getInterest();
-	public void setInterest( String interest );
+	public List<FoafDocument> getInterests();
+	public void setInterests( final List<FoafDocument> interests );
+	public void addInterest( final FoafDocument interest );
 	
-	// foaf:topic_interest foaf:publications foaf:currentProject foaf:pastProject
-	public String getTopic_interest();
-	public void setTopic_interest( String topic_interest );
 	
-	public String getPublications();
-	public void setPublications( String publications );
+	public List<String> getTopic_interests();
+	public void setTopic_interests( final List<String> topic_interests );
+	public void addTopic_interest( final String topic_interest );
 	
-	public String getCurrentProject();
-	public void setCurrentProject( String currentProject );
 	
-	public String getPastProject();
-	public void setPastProject( String pastProject );
+	public List<FoafDocument> getPublications();
+	public void setPublications( final List<FoafDocument> publications );
+	public void addPublication( final FoafDocument publication );
+	
+	public FoafProject getCurrentProject();
+	public void setCurrentProject( final FoafProject currentProject );
+	
+	public List<FoafProject> getPastProjects();
+	public void setPastProjects( final List<FoafProject> pastProjects );
+	public void addPastProject( final FoafProject pastProject );
+	
+	public List<FoafOnlineAccount> getAccounts();
+	public void setAccounts( final List<FoafOnlineAccount> onlineAccounts );
+	public void addAccount( final FoafOnlineAccount account );
 	
 	
 }

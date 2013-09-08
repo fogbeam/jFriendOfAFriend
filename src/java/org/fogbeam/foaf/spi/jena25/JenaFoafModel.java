@@ -5,15 +5,21 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.fogbeam.foaf.api.FoafDocument;
 import org.fogbeam.foaf.api.FoafModel;
+import org.fogbeam.foaf.api.FoafOnlineAccount;
 import org.fogbeam.foaf.api.FoafPerson;
+import org.fogbeam.foaf.api.FoafProject;
+import org.fogbeam.foaf.model.FoafOnlineAccountImpl;
 import org.fogbeam.foaf.model.FoafPersonImpl;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
+import com.hp.hpl.jena.vocabulary.DC;
 
 public class JenaFoafModel implements FoafModel
 {
@@ -35,6 +41,13 @@ public class JenaFoafModel implements FoafModel
 		return( p );
 	}
 
+	@Override
+	public FoafOnlineAccount newOnlineAccount()
+	{
+		FoafOnlineAccount account = new FoafOnlineAccountImpl();
+		return( account );
+	}
+	
 	@Override
 	public void clear()
 	{
@@ -77,6 +90,24 @@ public class JenaFoafModel implements FoafModel
 	private void populatePersonProperties( FoafPerson person, Resource jenaPerson )
 	{
 		
+		Model jenaModel = jenaPerson.getModel();
+		List<FoafOnlineAccount> accounts = person.getAccounts();
+		if( null != accounts )
+		{
+			for( FoafOnlineAccount account : accounts )
+			{
+				Resource accountResource = jenaModel.createResource( FOAF.OnlineAccount );
+				accountResource.addProperty( FOAF.accountServiceHomepage, account.getAccountServiceHomepage() );
+				accountResource.addProperty( FOAF.accountName, account.getAccountName() );
+				accountResource.addProperty( DC.identifier, account.getIdentifier() );
+				accountResource.addProperty( DC.type, account.getType() );
+				
+				Property accountProperty = jenaModel.createProperty( "http://xmlns.com/foaf/0.1/account" );
+				jenaPerson.addProperty( accountProperty, accountResource );
+				
+			}
+		}
+		
 		String name = person.getName();
 		if( null != name )
 		{
@@ -94,10 +125,10 @@ public class JenaFoafModel implements FoafModel
 			jenaPerson.addProperty( FOAF.birthday,  birthday);			
 		}
 		
-		String currentProject = person.getCurrentProject();
+		FoafProject currentProject = person.getCurrentProject();
 		if( null != currentProject )
 		{
-			jenaPerson.addProperty( FOAF.currentProject, currentProject );
+			// jenaPerson.addProperty( FOAF.currentProject, currentProject );
 		}
 		
 		String familyName = person.getFamily_name();
@@ -141,10 +172,10 @@ public class JenaFoafModel implements FoafModel
 			jenaPerson.addProperty( FOAF.img, img );
 		}
 		
-		String interest = person.getInterest();
-		if( null != interest )
+		List<FoafDocument> interests = person.getInterests();
+		if( null != interests )
 		{
-			jenaPerson.addProperty( FOAF.interest, interest );
+			// jenaPerson.addProperty( FOAF.interest, interest );
 		}
 		
 		String jabberID = person.getJabberID();
@@ -153,10 +184,10 @@ public class JenaFoafModel implements FoafModel
 			jenaPerson.addProperty( FOAF.jabberID, jabberID );
 		}
 		
-		String knows = person.getKnows();
+		List<FoafPerson> knows = person.getKnows();
 		if( null != knows )
 		{
-			jenaPerson.addProperty( FOAF.knows, knows );
+			// jenaPerson.addProperty( FOAF.knows, knows );
 		}
 		
 		String made = person.getMade();
@@ -195,10 +226,10 @@ public class JenaFoafModel implements FoafModel
 			jenaPerson.addProperty( FOAF.openid, openID );
 		}
 		
-		String pastProject = person.getPastProject();
-		if( null != pastProject )
+		List<FoafProject> pastProjects = person.getPastProjects();
+		if( null != pastProjects )
 		{
-			jenaPerson.addProperty( FOAF.pastProject, pastProject );
+			// jenaPerson.addProperty( FOAF.pastProject, pastProject );
 		}
 	
 		String plan = person.getPlan();
@@ -207,10 +238,10 @@ public class JenaFoafModel implements FoafModel
 			jenaPerson.addProperty( FOAF.plan, plan );
 		}
 
-		String publications = person.getPublications();
+		List<FoafDocument> publications = person.getPublications();
 		if( null != publications )
 		{
-			jenaPerson.addProperty( FOAF.publications, publications );
+			// jenaPerson.addProperty( FOAF.publications, publications );
 		}
 		
 		String schoolHomepage = person.getSchoolHomepage();
@@ -231,10 +262,10 @@ public class JenaFoafModel implements FoafModel
 			jenaPerson.addProperty( FOAF.tipjar, tipjar );
 		}
 		
-		String topicInterest = person.getTopic_interest();
-		if( null != topicInterest )
+		List<String> topicInterests = person.getTopic_interests();
+		if( null != topicInterests )
 		{
-			jenaPerson.addProperty( FOAF.topic_interest, topicInterest );
+			// jenaPerson.addProperty( FOAF.topic_interest, topicInterest );
 		}
 		
 		String workplaceHomepage = person.getWorkplaceHomepage();

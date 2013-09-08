@@ -9,7 +9,8 @@ public interface FoafModel
 	public void addPerson( FoafPerson person );
 	
 	public FoafPerson newPerson();
-
+	public FoafOnlineAccount newOnlineAccount();
+	
 	public void clear();
 	public void read( InputStream in );
 	public void write( OutputStream out );
