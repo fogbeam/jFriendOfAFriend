@@ -13,6 +13,7 @@ import org.fogbeam.foaf.api.FoafProject;
 import org.fogbeam.foaf.model.FoafOnlineAccountImpl;
 import org.fogbeam.foaf.model.FoafPersonImpl;
 
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
